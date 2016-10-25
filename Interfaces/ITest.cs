@@ -10,10 +10,10 @@ namespace Interfaces
     {
         bool IsMultiAnswer { get; set; }
         int ID { get; set; }
-        int Time { get; set; }
+        int Minutes { get; set; }
         string Title { get; set; }
         IRating RatingType { get; set; }
-        List<IQuestion> Questions { get; set; }
+        IEnumerable<IQuestion> Questions { get; set; }
 
     }
 }

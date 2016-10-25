@@ -6,7 +6,55 @@
         xmlns:local="clr-namespace:TestsApplication"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    
+    <Window.DataContext>
+        <local:TestListViewModel/>
+    </Window.DataContext>
+
+    <DockPanel LastChildFill="True">
+        <!--<Grid>
+        </Grid>-->
+        <ListBox Name="lstBox" ItemsSource="{Binding Tests}" DockPanel.Dock="Left">
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}" FontWeight="Bold"
+                                       Foreground="White" Background="Black" Margin="2"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+            <!--<ListBox.Template>
+                <ControlTemplate>
+                    <DockPanel MaxWidth="260">
+                        <Grid DockPanel.Dock="Top" Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MaxWidth="30"></ColumnDefinition>
+                                <ColumnDefinition MaxWidth="80"></ColumnDefinition>
+                                <ColumnDefinition MaxWidth="60"></ColumnDefinition>
+                                <ColumnDefinition MaxWidth="100"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0">ID</Label>
+                            <Label Grid.Column="1">Title</Label>
+                            <Label Grid.Column="2">Minutes</Label>
+                            <Label Grid.Column="3">Many Answers</Label>
+                        </Grid>
+                        <ItemsPresenter></ItemsPresenter>
+                    </DockPanel>
+                </ControlTemplate>
+            </ListBox.Template>-->
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding ID}" MinWidth="20"/>
+                        <Label Content="{Binding Title}" MinWidth="80"/>
+                        <Label Content="{Binding Minutes}" MinWidth="60"/>
+                        <Label Content="{Binding IsMultiAnswer}" MaxWidth="100"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+   
 </Window>

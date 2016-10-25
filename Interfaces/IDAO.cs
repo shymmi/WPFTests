@@ -9,7 +9,7 @@ namespace Interfaces
     public interface IDAO
     {
         IEnumerable<ITest> GetAllTests();
-        IEnumerable<IQuestion> GetAllQuestions(ITest test);
+        IEnumerable<IUser> GetAllUsers();
 
         ITest CreateNewTest();
         void AddTest(ITest test);

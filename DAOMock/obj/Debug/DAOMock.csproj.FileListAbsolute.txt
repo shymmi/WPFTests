@@ -1,1 +1,7 @@
 c:\users\szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\obj\Debug\DAOMock.csprojResolveAssemblyReference.cache
+C:\Users\Szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\bin\Debug\DAOMock.dll
+C:\Users\Szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\bin\Debug\DAOMock.pdb
+C:\Users\Szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\bin\Debug\Interfaces.dll
+C:\Users\Szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\bin\Debug\Interfaces.pdb
+C:\Users\Szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\obj\Debug\DAOMock.dll
+C:\Users\Szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\obj\Debug\DAOMock.pdb
