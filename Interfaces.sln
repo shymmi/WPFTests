@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{9E528AF8-A901-4D61-A7E9-98578DCFD06F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAOMock", "DAOMock\DAOMock.csproj", "{F3946636-CD87-4E19-94AB-E77C953C4D33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsApplication", "TestsApplication\TestsApplication.csproj", "{DD82A952-E384-4A63-86DF-A08821AEBA5F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E528AF8-A901-4D61-A7E9-98578DCFD06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E528AF8-A901-4D61-A7E9-98578DCFD06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E528AF8-A901-4D61-A7E9-98578DCFD06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E528AF8-A901-4D61-A7E9-98578DCFD06F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3946636-CD87-4E19-94AB-E77C953C4D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3946636-CD87-4E19-94AB-E77C953C4D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3946636-CD87-4E19-94AB-E77C953C4D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3946636-CD87-4E19-94AB-E77C953C4D33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD82A952-E384-4A63-86DF-A08821AEBA5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD82A952-E384-4A63-86DF-A08821AEBA5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD82A952-E384-4A63-86DF-A08821AEBA5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD82A952-E384-4A63-86DF-A08821AEBA5F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
