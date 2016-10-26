@@ -11,9 +11,57 @@
         <local:TestListViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Text="{Binding Path=Text,
+                                                    RelativeSource={RelativeSource TemplatedParent}, 
+                                                    Mode=TwoWay,
+                                                    UpdateSourceTrigger=PropertyChanged}"
+                                     x:Name="textSource" 
+                                     Background="Transparent" 
+                                     Panel.ZIndex="2" />
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="LightGray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <DockPanel LastChildFill="True">
         <!--<Grid>
         </Grid>-->
+        <Popup Placement="Center" IsOpen="{Binding User.IsNotLoggedIn, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True">
+            <StackPanel MinHeight="50" MinWidth="110" Background="White">
+                <Border BorderBrush="Gray" BorderThickness="1">
+                    <DockPanel>
+                        <TextBox Name="nick" Style="{StaticResource placeHolder}" Tag="username" DockPanel.Dock="Top" Margin="0 5 0 5" Height="24" Width="80" Text="{Binding User.NickName, Mode=TwoWay}"></TextBox>
+                        <TextBox Name="password" Style="{StaticResource placeHolder}" Tag="password" DockPanel.Dock="Top" Margin="0 5 0 5" Height="24" Width="80" Text="{Binding User.Password, Mode=TwoWay}"></TextBox>
+                        <Button Command="{Binding LoginCommand}">Login</Button>
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+        </Popup>
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" MinHeight="30">
+            <Button Width="100" Margin="10 0 10 0">Solve Test</Button>
+            <Button Width="100" Margin="10 0 10 0">Edit Test</Button>
+            <Button Width="100" Margin="10 0 10 0">Add New Test</Button>
+            <Button Width="100" Margin="10 0 10 0">Delete Test</Button>
+        </DockPanel>
         <ListBox Name="lstBox" ItemsSource="{Binding Tests}" DockPanel.Dock="Left">
             <ListBox.GroupStyle>
                 <GroupStyle>

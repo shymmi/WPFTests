@@ -3,3 +3,8 @@ c:\users\szymon\documents\visual studio 2015\Projects\Interfaces\Interfaces\bin\
 c:\users\szymon\documents\visual studio 2015\Projects\Interfaces\Interfaces\obj\Debug\Interfaces.csprojResolveAssemblyReference.cache
 c:\users\szymon\documents\visual studio 2015\Projects\Interfaces\Interfaces\obj\Debug\Interfaces.dll
 c:\users\szymon\documents\visual studio 2015\Projects\Interfaces\Interfaces\obj\Debug\Interfaces.pdb
+E:\Studia\PW - projekt\WPFTests\Interfaces\bin\Debug\Interfaces.dll
+E:\Studia\PW - projekt\WPFTests\Interfaces\bin\Debug\Interfaces.pdb
+E:\Studia\PW - projekt\WPFTests\Interfaces\obj\Debug\Interfaces.csprojResolveAssemblyReference.cache
+E:\Studia\PW - projekt\WPFTests\Interfaces\obj\Debug\Interfaces.dll
+E:\Studia\PW - projekt\WPFTests\Interfaces\obj\Debug\Interfaces.pdb

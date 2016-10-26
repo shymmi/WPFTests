@@ -11,6 +11,7 @@ namespace Interfaces
         string NickName { get; set; }
         string Password { get; set; }
         bool CanEdit { get; set; }
+        bool IsNotLoggedIn { get; set; }
         List<ITest> SolvedTests { get; set; }
         ITest OngoingTest { get; set; }
     }

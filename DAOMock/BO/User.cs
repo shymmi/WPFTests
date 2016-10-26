@@ -7,9 +7,15 @@ using Interfaces;
 
 namespace DAOMock.BO
 {
-    class User : IUser
+    public class User : IUser
     {
         public bool CanEdit
+        {
+            get;
+            set;
+        }
+
+        public bool IsNotLoggedIn
         {
             get;
             set;
@@ -37,6 +43,13 @@ namespace DAOMock.BO
         {
             get;
             set;
+        }
+
+        public User()
+        {
+            Password = "";
+            NickName = "";
+            IsNotLoggedIn = true;
         }
     }
 }

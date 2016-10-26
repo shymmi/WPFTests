@@ -5,3 +5,10 @@ C:\Users\Szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\bin\Deb
 C:\Users\Szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\bin\Debug\Interfaces.pdb
 C:\Users\Szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\obj\Debug\DAOMock.dll
 C:\Users\Szymon\documents\visual studio 2015\Projects\Interfaces\DAOMock\obj\Debug\DAOMock.pdb
+E:\Studia\PW - projekt\WPFTests\DAOMock\bin\Debug\DAOMock.dll
+E:\Studia\PW - projekt\WPFTests\DAOMock\bin\Debug\DAOMock.pdb
+E:\Studia\PW - projekt\WPFTests\DAOMock\bin\Debug\Interfaces.dll
+E:\Studia\PW - projekt\WPFTests\DAOMock\bin\Debug\Interfaces.pdb
+E:\Studia\PW - projekt\WPFTests\DAOMock\obj\Debug\DAOMock.csprojResolveAssemblyReference.cache
+E:\Studia\PW - projekt\WPFTests\DAOMock\obj\Debug\DAOMock.dll
+E:\Studia\PW - projekt\WPFTests\DAOMock\obj\Debug\DAOMock.pdb

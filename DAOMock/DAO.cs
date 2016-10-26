@@ -16,8 +16,8 @@ namespace DAOMock
         {
             _users = new List<IUser>()
             {
-                new BO.User() {CanEdit = false, NickName = "User", Password = "upass", OngoingTest = null, SolvedTests = null },
-                new BO.User() {CanEdit = true, NickName = "Editor", Password = "epass", OngoingTest = null, SolvedTests = null }
+                new BO.User() {CanEdit = false, NickName = "user", Password = "upass", OngoingTest = null, SolvedTests = null, IsNotLoggedIn = true },
+                new BO.User() {CanEdit = true, NickName = "editor", Password = "epass", OngoingTest = null, SolvedTests = null, IsNotLoggedIn = true }
             };
 
             _tests = new List<ITest>()
