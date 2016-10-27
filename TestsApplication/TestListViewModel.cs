@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Interfaces;
 using System.Windows.Data;
 using System.Windows.Input;
+using TestsApplication.Menu;
 
 namespace TestsApplication
 {
@@ -23,19 +24,26 @@ namespace TestsApplication
             }
         }
 
+        
         private ObservableCollection<TestViewModel> _tests;
         private IDAO _dao;
         private ListCollectionView _view;
         private IUser _user;
-        private RelayCommand _loginCommand;
+        private RelayCommand _logoutCommand;
+        private RelayCommand _addTestCommand;
+        private RelayCommand _solveTestCommand;
+        private RelayCommand _editTestCommand;
 
         public TestListViewModel()
         {
-            _user = new DAOMock.BO.User();
+            _user = UserContext.user;
             _tests = new ObservableCollection<TestViewModel>();
-            _dao = new DAOMock.DAO();
+            _dao = UserContext.dao;
             _view = (ListCollectionView)CollectionViewSource.GetDefaultView(_tests);
-            _loginCommand = new RelayCommand(param => Login());
+            _logoutCommand = new RelayCommand(param => Logout());
+            _addTestCommand = new RelayCommand(param => AddTest());
+            _solveTestCommand = new RelayCommand(param => SolveTest());
+            _editTestCommand = new RelayCommand(param => EditTest());
             GetAllTests();
         }
 
@@ -50,6 +58,26 @@ namespace TestsApplication
                 _user = value;
                 RaisePropertyChanged("User");
             }
+        }
+
+        public RelayCommand LogoutCommand
+        {
+            get { return _logoutCommand; }
+        }
+
+        public RelayCommand AddTestCommand
+        {
+            get { return _addTestCommand; }
+        }
+
+        public RelayCommand SolveTestCommand
+        {
+            get { return _solveTestCommand; }
+        }
+
+        public RelayCommand EditTestCommand
+        {
+            get { return _editTestCommand; }
         }
 
         public ObservableCollection<TestViewModel> Tests
@@ -73,23 +101,24 @@ namespace TestsApplication
             }
         }
 
-        public RelayCommand LoginCommand
+        private void AddTest()
         {
-            get { return _loginCommand; }
+            Switcher.Switch(new TestAdd());
         }
 
-        private void Login()
-        {   
-            if (_dao.GetAllUsers().Any(x => x.NickName == _user.NickName && x.Password == _user.Password))
-            {
-                User = _dao.GetAllUsers().First(x => x.NickName == _user.NickName && x.Password == _user.Password);
-                User.IsNotLoggedIn = false;
-                RaisePropertyChanged("User");
-            }
-            else
-            {
-                Console.WriteLine("wrong");
-            }
+        private void SolveTest()
+        {
+            Switcher.Switch(new TestSolve());
+        }
+
+        private void EditTest()
+        {
+            Switcher.Switch(new TestEdit());
+        }
+
+        private void Logout()
+        {
+            Switcher.Switch(new Login());
         }
     }
 }

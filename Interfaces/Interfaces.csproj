@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="IAnswer.cs" />
     <Compile Include="IDAO.cs" />
+    <Compile Include="ISwitchable.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IQuestion.cs" />
     <Compile Include="IRating.cs" />

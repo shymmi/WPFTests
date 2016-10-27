@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Studia\PW - projekt\WPFTests\TestsApplication\obj\Debug\
+D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\
 TestsApplication
 none
 false
 DEBUG;TRACE
-E:\Studia\PW - projekt\WPFTests\TestsApplication\App.xaml
-11151548125
+D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\App.xaml
+670690899
 
-1320390762
-15-1845207498
-MainWindow.xaml;
+22-1672109568
+17946121090
+Menu\Login.xaml;Menu\TestAdd.xaml;Menu\TestEdit.xaml;Menu\TestsList.xaml;Menu\TestSolve.xaml;PageSwitcher.xaml;
 
-True
+False
 

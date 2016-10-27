@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace TestsApplication
 {
-    class TestViewModel : INotifyPropertyChanged
+    public class TestViewModel : INotifyPropertyChanged
     {
         private ITest _test;
 
@@ -103,6 +103,11 @@ namespace TestsApplication
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
                 //Validate();
             }
+        }
+
+        public TestViewModel()
+        {
+            //todo
         }
     }
 }
