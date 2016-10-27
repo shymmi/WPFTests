@@ -9,6 +9,7 @@ using Interfaces;
 using System.Windows.Data;
 using System.Windows.Input;
 using TestsApplication.Menu;
+using DAOMock.BO;
 
 namespace TestsApplication
 {
@@ -25,9 +26,9 @@ namespace TestsApplication
         }
 
         
-        private ObservableCollection<TestViewModel> _tests;
+        private ObservableCollection<Test> _tests;
+        private Test _selectedTest;
         private IDAO _dao;
-        private ListCollectionView _view;
         private IUser _user;
         private RelayCommand _logoutCommand;
         private RelayCommand _addTestCommand;
@@ -36,14 +37,17 @@ namespace TestsApplication
 
         public TestListViewModel()
         {
+            UserContext.test = null;
+
             _user = UserContext.user;
-            _tests = new ObservableCollection<TestViewModel>();
+            _tests = new ObservableCollection<Test>();
             _dao = UserContext.dao;
-            _view = (ListCollectionView)CollectionViewSource.GetDefaultView(_tests);
+
             _logoutCommand = new RelayCommand(param => Logout());
             _addTestCommand = new RelayCommand(param => AddTest());
             _solveTestCommand = new RelayCommand(param => SolveTest());
             _editTestCommand = new RelayCommand(param => EditTest());
+
             GetAllTests();
         }
 
@@ -80,7 +84,20 @@ namespace TestsApplication
             get { return _editTestCommand; }
         }
 
-        public ObservableCollection<TestViewModel> Tests
+        public Test SelectedTest
+        {
+            get
+            {
+                return _selectedTest;
+            }
+            set
+            {
+                _selectedTest = value;
+                RaisePropertyChanged("SelectedTest");
+            }
+        }
+
+        public ObservableCollection<Test> Tests
         {
             get
             {
@@ -97,7 +114,7 @@ namespace TestsApplication
         {
             foreach (var t in _dao.GetAllTests())
             {
-                _tests.Add(new TestViewModel(t));
+                _tests.Add((Test)t);
             }
         }
 
@@ -108,11 +125,15 @@ namespace TestsApplication
 
         private void SolveTest()
         {
+            if (SelectedTest == null) return;
+            UserContext.test = SelectedTest;
             Switcher.Switch(new TestSolve());
         }
 
         private void EditTest()
         {
+            if (SelectedTest == null) return;
+            UserContext.test = SelectedTest;
             Switcher.Switch(new TestEdit());
         }
 

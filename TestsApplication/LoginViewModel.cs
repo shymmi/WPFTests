@@ -56,7 +56,7 @@ namespace TestsApplication
             {
                 User = _dao.GetAllUsers().First(x => x.NickName == _user.NickName && x.Password == _user.Password);
 
-                UserContext.user = User;
+                UserContext.user = (DAOMock.BO.User)User;
                 Switcher.Switch(new TestsList());
             }
         }

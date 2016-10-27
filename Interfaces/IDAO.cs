@@ -13,5 +13,6 @@ namespace Interfaces
 
         ITest CreateNewTest();
         void AddTest(ITest test);
+        void EditTest(ITest test);
     }
 }

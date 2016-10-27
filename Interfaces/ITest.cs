@@ -14,6 +14,5 @@ namespace Interfaces
         string Title { get; set; }
         IRating RatingType { get; set; }
         IEnumerable<IQuestion> Questions { get; set; }
-
     }
 }

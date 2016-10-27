@@ -6,13 +6,38 @@
       xmlns:local="clr-namespace:TestsApplication.Menu"
       xmlns:data="clr-namespace:TestsApplication"
       mc:Ignorable="d" 
+      FontSize="15"
       d:DesignHeight="350" d:DesignWidth="550">
 
     <UserControl.DataContext>
-        <data:TestViewModel/>
+        <data:AddTestViewModel/>
     </UserControl.DataContext>
 
-    <DockPanel Background="White">
-        <TextBlock DockPanel.Dock="Top">HI Edit</TextBlock>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Styles\PlaceHolder.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <DockPanel LastChildFill="True">
+        <Button DockPanel.Dock="Bottom" Width="120" HorizontalAlignment="Left" Command="{Binding BackCommand}">Go back</Button>
+        <Button DockPanel.Dock="Bottom" Width="120" HorizontalAlignment="Center" Command="{Binding SubmitTestCommand}">Submit Test</Button>
+        <StackPanel Background="White">
+            <WrapPanel Margin="0 5">
+                <TextBlock Margin="0 0 5 0">Title:</TextBlock>
+                <TextBox Text="{Binding Test.Title}" MinWidth="140"></TextBox>
+            </WrapPanel>
+            <WrapPanel Margin="0 5">
+                <TextBlock Margin="0 0 5 0">Minutes:</TextBlock>
+                <TextBox Text="{Binding Test.Minutes}" MinWidth="26"></TextBox>
+            </WrapPanel>
+            <WrapPanel Margin="0 5">
+                <TextBlock Margin="0 0 5 0">Many Answers:</TextBlock>
+                <CheckBox IsEnabled="False" IsChecked="{Binding Test.IsMultiAnswer}" VerticalAlignment="Center"></CheckBox>
+            </WrapPanel>
+            <Button DockPanel.Dock="Bottom" Width="120" Command="{Binding AddQuestionCommand}">Add Question</Button>
+        </StackPanel>
     </DockPanel>
 </UserControl>

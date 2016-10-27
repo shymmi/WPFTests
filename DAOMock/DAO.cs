@@ -148,5 +148,13 @@ namespace DAOMock
         {
             return _users;
         }
+
+        public void EditTest(ITest test)
+        {   
+            var t = _tests.First(x => x.ID == test.ID);
+            t.Questions = test.Questions;
+            t.Minutes = test.Minutes;
+            t.Title = test.Title;
+        }
     }
 }

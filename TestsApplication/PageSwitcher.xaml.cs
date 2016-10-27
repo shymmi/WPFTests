@@ -16,6 +16,7 @@ namespace TestsApplication
             InitializeComponent();
             Switcher.pageSwitcher = this;
             Switcher.Switch(new Menu.Login());
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         public void Navigate(UserControl nextPage)

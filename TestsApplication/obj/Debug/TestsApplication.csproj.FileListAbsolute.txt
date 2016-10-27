@@ -65,3 +65,4 @@ D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestEdit.baml
 D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestSolve.baml
 D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestAdd.g.cs
 D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestAdd.baml
+D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Styles\PlaceHolder.baml
