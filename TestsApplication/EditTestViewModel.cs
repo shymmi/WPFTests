@@ -14,8 +14,8 @@ namespace TestsApplication
     class EditTestViewModel : INotifyPropertyChanged
     {
         private Test _test;
-        private ObservableCollection<IQuestion> _questions;
-        private IQuestion _selectedQuestion;
+        private ObservableCollection<QuestionViewModel> _questions;
+        private QuestionViewModel _selectedQuestion;
         private IAnswer _selectedAnswer;
         private RelayCommand _submitTestCommand;
         private RelayCommand _backCommand;
@@ -27,18 +27,27 @@ namespace TestsApplication
         public EditTestViewModel()
         {
             _test = UserContext.test;
-            _questions = new ObservableCollection<IQuestion>(_test.Questions);
+            _questions = new ObservableCollection<QuestionViewModel>();
             _submitTestCommand = new RelayCommand(param => SubmitTest());
             _backCommand = new RelayCommand(param => GoBack());
             _addQuestionCommand = new RelayCommand(param => AddQuestion());
             _deleteQuestionCommand = new RelayCommand(param => DeleteQuestion());
             _addAnswerCommand = new RelayCommand(param => AddAnswer());
             _deleteAnswerCommand = new RelayCommand(param => DeleteAnswer());
+            FillQuestions();
+        }
+
+        private void FillQuestions()
+        {   
+            foreach (var q in _test.Questions)
+            {
+                _questions.Add(new QuestionViewModel((Question)q));
+            }          
         }
 
         private void AddQuestion()
         {
-            _questions.Add(new Question());
+            _questions.Add(new QuestionViewModel(new Question()));
             _questions.Last().ID = _questions.Count > 0 ? _questions.Max(x => x.ID) + 1 : 1;
         }
 
@@ -50,7 +59,7 @@ namespace TestsApplication
 
         private void AddAnswer()
         {
-            //_selectedQuestion.Answers.Add(new Answer());
+            _selectedQuestion.Answers.Add(new Answer());
         }
 
         private void DeleteAnswer()
@@ -66,7 +75,17 @@ namespace TestsApplication
         private void SubmitTest()
         {
             if (_test.Title == "") return;
-            _test.Questions = _questions;
+
+            var t = new List<IQuestion>();
+            foreach (var q in _test.Questions)
+            {
+                t.Add(new Question());
+                t.Last().Answers = q.Answers;
+                t.Last().ID = q.ID;
+                t.Last().MaxPoints = q.MaxPoints;
+                t.Last().Text = q.Text;
+            }
+            _test.Questions = (IEnumerable<IQuestion>)t;
             UserContext.dao.EditTest(_test);
             Switcher.Switch(new TestsList());
         }
@@ -81,7 +100,7 @@ namespace TestsApplication
             }
         }
 
-        public IQuestion SelectedQuestion
+        public QuestionViewModel SelectedQuestion
         {
             get { return _selectedQuestion; }
             set
@@ -104,7 +123,7 @@ namespace TestsApplication
             }
         }
 
-        public ObservableCollection<IQuestion> Questions
+        public ObservableCollection<QuestionViewModel> Questions
         {
             get
             {

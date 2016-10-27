@@ -6,22 +6,36 @@ using System.Text;
 using System.Threading.Tasks;
 using Interfaces;
 using System.ComponentModel;
+using DAOMock.BO;
 
 namespace TestsApplication
 {
     public class QuestionViewModel : INotifyPropertyChanged
     {
 
-        private IQuestion _question;
+        private Question _question;
 
-        public QuestionViewModel(IQuestion q)
+        public QuestionViewModel(Question q)
         {
             _question = q;
+            
+            FillAnswers(q);
         }
 
-        public ObservableCollection<IAnswer> Answers
+        private void FillAnswers(Question question)
+        {   
+            var t = new ObservableCollection<Answer>();
+
+            foreach (var a in question.Answers)
+            {
+                t.Add((Answer)a);
+            }
+            _question.Answers = t;
+        }
+
+        public ObservableCollection<Answer> Answers
         {
-            get { return (ObservableCollection<IAnswer>)(_question.Answers); }
+            get { return (ObservableCollection<Answer>)(_question.Answers); }
             set
             {
                 _question.Answers = value;

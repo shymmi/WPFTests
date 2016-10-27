@@ -84,7 +84,7 @@ namespace TestsApplication
         {
             get
             {
-                return (ObservableCollection<IQuestion>)(_test.Questions);
+                return new ObservableCollection<IQuestion>(_test.Questions);
             }
             set
             {
