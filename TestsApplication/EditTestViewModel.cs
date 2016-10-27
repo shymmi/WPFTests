@@ -15,6 +15,8 @@ namespace TestsApplication
     {
         private Test _test;
         private ObservableCollection<IQuestion> _questions;
+        private IQuestion _selectedQuestion;
+        private IAnswer _selectedAnswer;
         private RelayCommand _submitTestCommand;
         private RelayCommand _backCommand;
         private RelayCommand _addQuestionCommand;
@@ -29,21 +31,26 @@ namespace TestsApplication
             _submitTestCommand = new RelayCommand(param => SubmitTest());
             _backCommand = new RelayCommand(param => GoBack());
             _addQuestionCommand = new RelayCommand(param => AddQuestion());
+            _deleteQuestionCommand = new RelayCommand(param => DeleteQuestion());
+            _addAnswerCommand = new RelayCommand(param => AddAnswer());
+            _deleteAnswerCommand = new RelayCommand(param => DeleteAnswer());
         }
 
         private void AddQuestion()
         {
-            //add one answer
+            _questions.Add(new Question());
+            _questions.Last().ID = _questions.Count > 0 ? _questions.Max(x => x.ID) + 1 : 1;
         }
 
         private void DeleteQuestion()
         {
-            //add one answer
+            _questions.Remove(SelectedQuestion);
+            SelectedQuestion = null;
         }
 
         private void AddAnswer()
         {
-            //add one answer
+            //_selectedQuestion.Answers.Add(new Answer());
         }
 
         private void DeleteAnswer()
@@ -64,6 +71,26 @@ namespace TestsApplication
             Switcher.Switch(new TestsList());
         }
 
+        public IAnswer SelectedAnswer
+        {
+            get { return _selectedAnswer; }
+            set
+            {
+                _selectedAnswer = value;
+                RaisePropertyChanged("SelectedAnswer");
+            }
+        }
+
+        public IQuestion SelectedQuestion
+        {
+            get { return _selectedQuestion; }
+            set
+            {
+                _selectedQuestion = value;
+                RaisePropertyChanged("SelectedQuestion");
+            }
+        }
+
         public Test Test
         {
             get
@@ -77,7 +104,7 @@ namespace TestsApplication
             }
         }
 
-        public ObservableCollection<IQuestion> Question
+        public ObservableCollection<IQuestion> Questions
         {
             get
             {

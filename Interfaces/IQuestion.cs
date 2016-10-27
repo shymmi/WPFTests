@@ -7,7 +7,7 @@ namespace Interfaces
         int ID { get; set; }
         int MaxPoints { get; set; }
         string Text { get; set; }
-        List<IAnswer> Answers { get; set; }
+        IEnumerable<IAnswer> Answers { get; set; }
 
     }
 }

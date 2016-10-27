@@ -32,5 +32,10 @@ namespace DAOMock.BO
             get;
             set;
         }
+
+        public Answer()
+        {
+            IsSelected = false;
+        }
     }
 }

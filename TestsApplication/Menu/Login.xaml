@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:TestsApplication.Menu"
       xmlns:data="clr-namespace:TestsApplication"
       mc:Ignorable="d" 
-      d:DesignHeight="350" d:DesignWidth="550">
+      d:DesignHeight="550" d:DesignWidth="725"
+      FontSize="14">
 
     <UserControl.DataContext>
         <data:LoginViewModel/>
@@ -22,10 +23,10 @@
     <DockPanel Background="White">
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="24" FontWeight="Bold">Tests Application</TextBlock>
         <TextBlock DockPanel.Dock="Bottom">By Szymon Kasperski</TextBlock>
-        <StackPanel MinHeight="50" MaxWidth="110" Background="White" VerticalAlignment="Center">
+        <StackPanel MinHeight="50" MaxWidth="110" Background="White" VerticalAlignment="Center" FocusManager.FocusedElement="{Binding ElementName=nick}">
             <TextBox Name="nick" Style="{StaticResource placeHolder}" Tag="username" DockPanel.Dock="Top" Margin="0 0 0 5" Height="24" Width="80" Text="{Binding User.NickName, Mode=TwoWay}"></TextBox>
             <TextBox Name="password" Style="{StaticResource placeHolder}" Tag="password" DockPanel.Dock="Top" Margin="0 5 0 10" Height="24" Width="80" Text="{Binding User.Password, Mode=TwoWay}"></TextBox>
-            <Button Command="{Binding LoginCommand}" Height="24">Login</Button>
+            <Button Command="{Binding LoginCommand}" Height="24" IsDefault="True">Login</Button>
         </StackPanel>
     </DockPanel>
 </UserControl>

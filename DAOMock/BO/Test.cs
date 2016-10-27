@@ -45,17 +45,11 @@ namespace DAOMock.BO
             get;
             set;
         }
-        
-        public void AddQuestions(IEnumerable<IQuestion> questions)
-        {
-            Questions = questions;
-        }
 
         public Test()
         {
             IsMultiAnswer = false;
-            Title = "";
-            Questions = new List<IQuestion>();
+            Questions = new ObservableCollection<IQuestion>();
         }
     }
 }

@@ -6,55 +6,25 @@
       xmlns:local="clr-namespace:TestsApplication.Menu"
       xmlns:data="clr-namespace:TestsApplication"
       mc:Ignorable="d" 
-      d:DesignHeight="350" d:DesignWidth="550">
-
-    <UserControl.Resources>
-        <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Grid>
-                            <TextBox Text="{Binding Path=Text,
-                                                    RelativeSource={RelativeSource TemplatedParent}, 
-                                                    Mode=TwoWay,
-                                                    UpdateSourceTrigger=PropertyChanged}"
-                                     x:Name="textSource" 
-                                     Background="Transparent" 
-                                     Panel.ZIndex="2" />
-                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
-                                <TextBox.Style>
-                                    <Style TargetType="{x:Type TextBox}">
-                                        <Setter Property="Foreground" Value="Transparent"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
-                                                <Setter Property="Foreground" Value="LightGray"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBox.Style>
-                            </TextBox>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
-    <DockPanel Background="White">
+      d:DesignHeight="550" d:DesignWidth="725"
+      FontSize="16">
+    
+    <DockPanel Background="White" LastChildFill="True">
         <TextBlock DockPanel.Dock="Top" Text="{Binding Path=User.NickName, StringFormat=Logged as {0} }" Margin="0 5"></TextBlock>
-        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" MinHeight="30">
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" MinHeight="30" HorizontalAlignment="Center" Margin="0 10">
             <Button Width="100" Margin="10 0 10 0" Command="{Binding SolveTestCommand}">Solve Test</Button>
             <Button Width="100" Margin="10 0 10 0" Command="{Binding EditTestCommand}">Edit Test</Button>
-            <Button Width="100" Margin="10 0 10 0" Command="{Binding AddTestCommand}">Add New Test</Button>
+            <Button Width="110" Margin="10 0 10 0" Command="{Binding AddTestCommand}">Add New Test</Button>
             <Button Width="100" Margin="10 0 10 0" Command="{Binding LogoutCommand}">Logout</Button>
         </DockPanel>
-        <ListBox Name="lstBox" ItemsSource="{Binding Tests}" BorderThickness="0" Margin="0 10" MaxHeight="200" SelectedItem="{Binding SelectedTest}">
+        <TextBlock DockPanel.Dock="Top" Text="Available tests:" HorizontalAlignment="Center"/>
+        <ListBox Name="lstBox" ItemsSource="{Binding Tests}" BorderThickness="0" Margin="0 10" MinHeight="200" SelectedItem="{Binding SelectedTest}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding ID}" MinWidth="20"/>
-                        <Label Content="{Binding Title}" MinWidth="80"/>
-                        <Label Content="{Binding Minutes}" MinWidth="60"/>
-                        <Label Content="{Binding IsMultiAnswer}" MaxWidth="100"/>
+                        <TextBlock Text="ID:" VerticalAlignment="Center"/><Label Content="{Binding ID}" MinWidth="20"/>
+                        <TextBlock Text="Title:" VerticalAlignment="Center"/><Label Content="{Binding Title}" MinWidth="80"/>
+                        <TextBlock Text="Minutes:" VerticalAlignment="Center"/><Label Content="{Binding Minutes}" MinWidth="60"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

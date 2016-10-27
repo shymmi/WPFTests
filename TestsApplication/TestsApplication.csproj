@@ -75,6 +75,7 @@
     <Compile Include="Menu\TestSolve.xaml.cs">
       <DependentUpon>TestSolve.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuestionViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Switcher.cs" />
     <Compile Include="TestListViewModel.cs" />

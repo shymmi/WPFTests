@@ -8,7 +8,7 @@ namespace DAOMock.BO
 {
     public class Question : IQuestion
     {
-        public List<IAnswer> Answers
+        public IEnumerable<IAnswer> Answers
         {
             get;
             set;
@@ -30,6 +30,11 @@ namespace DAOMock.BO
         {
             get;
             set;
+        }
+
+        public Question()
+        {
+            Answers = new List<IAnswer>();
         }
     }
 }

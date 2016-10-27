@@ -7,7 +7,7 @@
       xmlns:data="clr-namespace:TestsApplication"
       mc:Ignorable="d" 
       FontSize="15"
-      d:DesignHeight="350" d:DesignWidth="550">
+      d:DesignHeight="550" d:DesignWidth="725">
 
     <UserControl.DataContext>
         <data:AddTestViewModel/>
