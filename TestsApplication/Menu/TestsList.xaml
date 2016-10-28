@@ -8,17 +8,21 @@
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="725"
       FontSize="16">
+
+    <UserControl.DataContext>
+        <data:TestListViewModel/>
+    </UserControl.DataContext>
     
     <DockPanel Background="White" LastChildFill="True">
         <TextBlock DockPanel.Dock="Top" Text="{Binding Path=User.NickName, StringFormat=Logged as {0} }" Margin="0 5"></TextBlock>
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" MinHeight="30" HorizontalAlignment="Center" Margin="0 10">
             <Button Width="100" Margin="10 0 10 0" Command="{Binding SolveTestCommand}">Solve Test</Button>
-            <Button Width="100" Margin="10 0 10 0" Command="{Binding EditTestCommand}">Edit Test</Button>
-            <Button Width="110" Margin="10 0 10 0" Command="{Binding AddTestCommand}">Add New Test</Button>
+            <Button Width="100" Margin="10 0 10 0" Command="{Binding EditTestCommand}" IsEnabled="{Binding User.CanEdit}">Edit Test</Button>
+            <Button Width="110" Margin="10 0 10 0" Command="{Binding AddTestCommand}" IsEnabled="{Binding User.CanEdit}">Add New Test</Button>
             <Button Width="100" Margin="10 0 10 0" Command="{Binding LogoutCommand}">Logout</Button>
         </DockPanel>
         <TextBlock DockPanel.Dock="Top" Text="Available tests:" HorizontalAlignment="Center"/>
-        <ListBox Name="lstBox" ItemsSource="{Binding Tests}" BorderThickness="0" Margin="0 10" MinHeight="200" SelectedItem="{Binding SelectedTest}">
+        <ListBox Name="lstBox" ItemsSource="{Binding Tests}" BorderThickness="0" Margin="0 10" MinHeight="200" SelectedItem="{Binding SelectedTest}" HorizontalAlignment="Center">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

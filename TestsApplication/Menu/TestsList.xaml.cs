@@ -24,7 +24,6 @@ namespace TestsApplication.Menu
         public TestsList()
         {
             InitializeComponent();
-            DataContext = new TestListViewModel();
         }
 
         public void UtilizeState(object state)

@@ -36,5 +36,13 @@ namespace DAOMock.BO
         {
             Answers = new List<IAnswer>();
         }
+
+        public Question(int id, int maxPoints, string text, IEnumerable<IAnswer> answers)
+        {
+            ID = id;
+            MaxPoints = maxPoints;
+            Text = text;
+            Answers = answers;
+        }
     }
 }

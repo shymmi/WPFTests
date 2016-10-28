@@ -10,13 +10,22 @@
       d:DesignHeight="550" d:DesignWidth="725">
 
     <UserControl.DataContext>
-        <data:AddTestViewModel/>
+        <data:EditTestViewModel/>
     </UserControl.DataContext>
-
+    
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="..\Styles\PlaceHolder.xaml"></ResourceDictionary>
+                <!--<ResourceDictionary>
+                    <Style TargetType="ListBoxItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="IsSelected" Value="True"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ResourceDictionary>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -31,7 +40,7 @@
                 <TextBlock Margin="5 0 5 0">Minutes:</TextBlock>
                 <TextBox Text="{Binding Test.Minutes}" MinWidth="26"></TextBox>
                 <TextBlock Margin="5 0 5 0">Many Answers:</TextBlock>
-                <CheckBox IsEnabled="False" IsChecked="{Binding Test.IsMultiAnswer}" VerticalAlignment="Center"></CheckBox>
+                <CheckBox Name="ManyAnswers" IsEnabled="False" IsChecked="{Binding Test.IsMultiAnswer}" VerticalAlignment="Center"></CheckBox>
             </WrapPanel>
             <WrapPanel Margin="0 5" HorizontalAlignment="Center">
                 <Button Width="120" Command="{Binding AddQuestionCommand}" Margin="10 0 10 0">Add Question</Button>
@@ -45,17 +54,44 @@
                     <DataTemplate>
                         <StackPanel>
                             <WrapPanel>
+                                <TextBlock Text="{Binding ID, StringFormat={} {0}. }" Margin="5 0"/>
                                 <TextBox Text="{Binding Text}" Margin="5 0" BorderThickness="0" MinWidth="140"/>
                                 <TextBlock>Points:</TextBlock>
                                 <TextBox Text="{Binding MaxPoints}" Margin="5 0" BorderThickness="0"/>
                             </WrapPanel>
-                            <ListBox ItemsSource="{Binding Answers}" BorderThickness="0" Margin="20 4 0 4">
+                            <ListBox Tag="{Binding ID}" ItemsSource="{Binding Answers}" BorderThickness="0" Margin="20 4 0 4" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SelectedAnswer}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
-                                            <WrapPanel>
+                                            <WrapPanel >
                                                 <TextBox Text="{Binding Text}" BorderThickness="0" MinWidth="80"/>
-                                                <CheckBox IsChecked="{Binding IsCorrect}" VerticalAlignment="Center"/>
+                                                <CheckBox IsChecked="{Binding IsCorrect}" VerticalAlignment="Center">
+                                                    <CheckBox.Style>
+                                                        <Style TargetType="{x:Type CheckBox}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ElementName=ManyAnswers, Path=IsChecked}" Value="False">
+                                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </CheckBox.Style>
+                                                </CheckBox>
+                                                <RadioButton VerticalAlignment="Center">
+                                                    <RadioButton.Style>
+                                                        <Style TargetType="{x:Type RadioButton}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ElementName=ManyAnswers, Path=IsChecked}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding ElementName=ManyAnswers, Path=IsChecked}" Value="False">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                    <Setter Property="GroupName" Value="{Binding Tag, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}"/>
+                                                                    <Setter Property="IsChecked" Value="{Binding IsCorrect}"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </RadioButton.Style>
+                                                </RadioButton>
                                             </WrapPanel>
                                         </StackPanel>
                                     </DataTemplate>

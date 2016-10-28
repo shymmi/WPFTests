@@ -16,7 +16,7 @@ namespace TestsApplication
         private Test _test;
         private ObservableCollection<QuestionViewModel> _questions;
         private QuestionViewModel _selectedQuestion;
-        private IAnswer _selectedAnswer;
+        private Answer _selectedAnswer;
         private RelayCommand _submitTestCommand;
         private RelayCommand _backCommand;
         private RelayCommand _addQuestionCommand;
@@ -53,18 +53,24 @@ namespace TestsApplication
 
         private void DeleteQuestion()
         {
-            _questions.Remove(SelectedQuestion);
-            SelectedQuestion = null;
+            if (_selectedQuestion == null) return;//always null
+            _questions.Remove(_selectedQuestion);
+            _selectedQuestion = null;
         }
 
         private void AddAnswer()
         {
+            if (_selectedQuestion == null) return;
             _selectedQuestion.Answers.Add(new Answer());
+            _selectedQuestion.Answers.Last().ID = _selectedQuestion.Answers.Max(x => x.ID) + 1;
         }
 
         private void DeleteAnswer()
         {
-            //add one answer
+            if (_selectedAnswer == null) return;
+            Console.WriteLine("Answer: {0}", _selectedAnswer.Text);
+            _selectedQuestion.Answers.Remove(_selectedAnswer);          
+            _selectedAnswer = null;
         }
 
         private void GoBack()
@@ -77,20 +83,16 @@ namespace TestsApplication
             if (_test.Title == "") return;
 
             var t = new List<IQuestion>();
-            foreach (var q in _test.Questions)
+            foreach (var q in _questions)
             {
-                t.Add(new Question());
-                t.Last().Answers = q.Answers;
-                t.Last().ID = q.ID;
-                t.Last().MaxPoints = q.MaxPoints;
-                t.Last().Text = q.Text;
+                t.Add(new Question(q.ID, q.MaxPoints, q.Text, q.Answers));
             }
-            _test.Questions = (IEnumerable<IQuestion>)t;
+            _test.Questions = t;
             UserContext.dao.EditTest(_test);
             Switcher.Switch(new TestsList());
         }
 
-        public IAnswer SelectedAnswer
+        public Answer SelectedAnswer
         {
             get { return _selectedAnswer; }
             set

@@ -24,7 +24,6 @@ namespace TestsApplication.Menu
         public TestEdit()
         {
             InitializeComponent();
-            DataContext = new EditTestViewModel();
         }
 
         public void UtilizeState(object state)

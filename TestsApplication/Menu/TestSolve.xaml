@@ -6,12 +6,94 @@
       xmlns:local="clr-namespace:TestsApplication.Menu"
       xmlns:data="clr-namespace:TestsApplication"
       mc:Ignorable="d" 
-      d:DesignHeight="350" d:DesignWidth="550">
+      FontSize="15"
+      d:DesignHeight="550" d:DesignWidth="725">
 
     <UserControl.DataContext>
-        <data:TestViewModel/>
+        <data:SolveTestViewModel/>
     </UserControl.DataContext>
-    <DockPanel>
-        <TextBlock DockPanel.Dock="Top">HI Solve</TextBlock>
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Styles\PlaceHolder.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <DockPanel LastChildFill="True">
+        <Button DockPanel.Dock="Bottom" Width="120" HorizontalAlignment="Left" Command="{Binding BackCommand}">Go back</Button>
+        <Button DockPanel.Dock="Bottom" Width="120" HorizontalAlignment="Center" Command="{Binding SubmitTestCommand}" Margin="0 10">Submit Test</Button>
+        <StackPanel Background="White">
+            <WrapPanel Margin="0 5">
+                <TextBlock Text="{Binding Test.Title}" MinWidth="140" FontSize="24"></TextBlock>
+                <TextBlock Margin="5 0 5 0" VerticalAlignment="Center">Many Answers:</TextBlock>
+                <CheckBox Name="ManyAnswers" IsEnabled="False" IsChecked="{Binding Test.IsMultiAnswer}" VerticalAlignment="Center" Margin="0 4 0 0"></CheckBox>
+                <WrapPanel VerticalAlignment="Center" Margin="150 0 0 0">
+                    <TextBlock Text="Time Left "/>
+                    <TextBlock Text="{Binding Minutes, StringFormat={} {0:00}:}" Margin="0"/>
+                    <TextBlock Text="{Binding Seconds, StringFormat={} {0:00}}" Margin="0"/>
+                </WrapPanel>
+            </WrapPanel>
+            <Popup StaysOpen="True" IsOpen="{Binding IsTimeUp}">
+                <StackPanel>
+                    <TextBlock Text="Time is Up!"/>
+                    <Button Command="{Binding SubmitTestCommand}">Ok</Button>
+                </StackPanel>
+            </Popup>
+            <TextBlock HorizontalAlignment="Center">Questions:</TextBlock>
+            <ListBox ItemsSource="{Binding Questions}" BorderThickness="0" Margin="0 10" MaxHeight="360" SelectedItem="{Binding SelectedQuestion}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding ID, StringFormat={} {0}. }" Margin="5 0"/>
+                                <TextBlock Text="{Binding Text}" Margin="5 0" MinWidth="140"/>
+                                <TextBlock>Max points:</TextBlock>
+                                <TextBlock Text="{Binding MaxPoints}" Margin="5 0"/>
+                            </WrapPanel>
+                            <ListBox Tag="{Binding ID}" ItemsSource="{Binding Answers}" BorderThickness="0" Margin="20 4 0 4" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SelectedAnswer}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <WrapPanel >
+                                                <TextBlock Text="{Binding Text}" MinWidth="80"/>
+                                                <CheckBox IsChecked="{Binding IsSelected}" VerticalAlignment="Center">
+                                                    <CheckBox.Style>
+                                                        <Style TargetType="{x:Type CheckBox}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ElementName=ManyAnswers, Path=IsChecked}" Value="False">
+                                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </CheckBox.Style>
+                                                </CheckBox>
+                                                <RadioButton VerticalAlignment="Center">
+                                                    <RadioButton.Style>
+                                                        <Style TargetType="{x:Type RadioButton}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ElementName=ManyAnswers, Path=IsChecked}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding ElementName=ManyAnswers, Path=IsChecked}" Value="False">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                    <Setter Property="GroupName" Value="{Binding Tag, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}"/>
+                                                                    <Setter Property="IsChecked" Value="{Binding IsSelected}"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </RadioButton.Style>
+                                                </RadioButton>
+                                            </WrapPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
     </DockPanel>
 </UserControl>

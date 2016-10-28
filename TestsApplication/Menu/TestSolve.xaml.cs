@@ -24,7 +24,6 @@ namespace TestsApplication.Menu
         public TestSolve()
         {
             InitializeComponent();
-            //DataContext = new TestViewModel(user);
         }
 
         public void UtilizeState(object state)

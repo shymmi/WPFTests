@@ -114,7 +114,7 @@ namespace DAOMock
                                 new BO.Answer {ID = 4, IsCorrect = false, Text = "Beef", IsSelected = false  }
                             }
                         },
-                        new BO.Question {ID = 5, MaxPoints = 1, Text = "sum of 5 and 6", Answers = new List<IAnswer>
+                        new BO.Question {ID = 6, MaxPoints = 1, Text = "sum of 5 and 6", Answers = new List<IAnswer>
                             {
                                 new BO.Answer {ID = 1, IsCorrect = true, Text = "equals 11", IsSelected = false },
                                 new BO.Answer {ID = 2, IsCorrect = false, Text = "is greater than 4 * 3", IsSelected = false  },
