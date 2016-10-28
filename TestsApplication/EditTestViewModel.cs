@@ -16,24 +16,24 @@ namespace TestsApplication
         private Test _test;
         private ObservableCollection<QuestionViewModel> _questions;
         private QuestionViewModel _selectedQuestion;
-        private Answer _selectedAnswer;
+        //private Answer _selectedAnswer;
+        private List<string> _ratingTypes;
         private RelayCommand _submitTestCommand;
-        private RelayCommand _backCommand;
         private RelayCommand _addQuestionCommand;
         private RelayCommand _deleteQuestionCommand;
         private RelayCommand _addAnswerCommand;
-        private RelayCommand _deleteAnswerCommand;
+        //private RelayCommand _deleteAnswerCommand;
 
         public EditTestViewModel()
         {
             _test = UserContext.test;
+            _ratingTypes = UserContext.dao.GetAllRatingTypes();
             _questions = new ObservableCollection<QuestionViewModel>();
             _submitTestCommand = new RelayCommand(param => SubmitTest());
-            _backCommand = new RelayCommand(param => GoBack());
             _addQuestionCommand = new RelayCommand(param => AddQuestion());
             _deleteQuestionCommand = new RelayCommand(param => DeleteQuestion());
             _addAnswerCommand = new RelayCommand(param => AddAnswer());
-            _deleteAnswerCommand = new RelayCommand(param => DeleteAnswer());
+            //_deleteAnswerCommand = new RelayCommand(param => DeleteAnswer());
             FillQuestions();
         }
 
@@ -65,22 +65,20 @@ namespace TestsApplication
             _selectedQuestion.Answers.Last().ID = _selectedQuestion.Answers.Max(x => x.ID) + 1;
         }
 
-        private void DeleteAnswer()
-        {
-            if (_selectedAnswer == null) return;
-            Console.WriteLine("Answer: {0}", _selectedAnswer.Text);
-            _selectedQuestion.Answers.Remove(_selectedAnswer);          
-            _selectedAnswer = null;
-        }
-
-        private void GoBack()
-        {
-            Switcher.Switch(new TestsList());
-        }
+        //private void DeleteAnswer()
+        //{
+        //    if (_selectedAnswer == null) return;
+        //    Console.WriteLine("Answer: {0}", _selectedAnswer.Text);
+        //    _selectedQuestion.Answers.Remove(_selectedAnswer);          
+        //    _selectedAnswer = null;
+        //}
 
         private void SubmitTest()
         {
             if (_test.Title == "") return;
+            if (!_questions.Any(x => x.Answers.Any(a => a.Text != ""))) return;
+            if (_questions.Any(x => x.Answers.Count == 0 || !x.Answers.Any(a => a.Text != ""))) return;
+            RemoveEmptyAnswers();
 
             var t = new List<IQuestion>();
             foreach (var q in _questions)
@@ -92,15 +90,32 @@ namespace TestsApplication
             Switcher.Switch(new TestsList());
         }
 
-        public Answer SelectedAnswer
+        private void RemoveEmptyAnswers()
         {
-            get { return _selectedAnswer; }
-            set
+            foreach (var q in _questions)
             {
-                _selectedAnswer = value;
-                RaisePropertyChanged("SelectedAnswer");
+                foreach (var a in q.Answers.ToList())
+                {
+                    if (a.Text == "") q.Answers.Remove(a);
+                }
             }
         }
+
+        public List<string> RatingTypes
+        {
+            get { return _ratingTypes; }
+        }
+
+
+        //public Answer SelectedAnswer
+        //{
+        //    get { return _selectedAnswer; }
+        //    set
+        //    {
+        //        _selectedAnswer = value;
+        //        RaisePropertyChanged("SelectedAnswer");
+        //    }
+        //}
 
         public QuestionViewModel SelectedQuestion
         {
@@ -146,14 +161,6 @@ namespace TestsApplication
             }
         }
 
-        public RelayCommand BackCommand
-        {
-            get
-            {
-                return _backCommand;
-            }
-        }
-
         public RelayCommand AddQuestionCommand
         {
             get
@@ -178,13 +185,13 @@ namespace TestsApplication
             }
         }
 
-        public RelayCommand DeleteAnswerCommand
-        {
-            get
-            {
-                return _deleteAnswerCommand;
-            }
-        }
+        //public RelayCommand DeleteAnswerCommand
+        //{
+        //    get
+        //    {
+        //        return _deleteAnswerCommand;
+        //    }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 

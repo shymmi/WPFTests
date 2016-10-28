@@ -11,9 +11,16 @@ namespace DAOMock
     {
         private List<IUser> _users;
         private List<ITest> _tests;
+        private List<string> _ratingTypes;
 
         public DAO()
         {
+            _ratingTypes = new List<string>()
+            {
+                "No minus points",
+                "Minus points"
+            };
+
             _users = new List<IUser>()
             {
                 new BO.User() {CanEdit = false, NickName = "user", Password = "upass", OngoingTest = null, SolvedTests = null, IsNotLoggedIn = true },
@@ -24,7 +31,7 @@ namespace DAOMock
             {
                 new BO.Test()
                 {
-                    ID = 1, IsMultiAnswer = false, RatingType = null, Minutes = 5, Title = "Animals", Questions = new List<IQuestion>
+                    ID = 1, IsMultiAnswer = false, RatingType = "No minus points", Minutes = 5, Title = "Animals", Questions = new List<IQuestion>
                     {
                         new BO.Question {ID = 1, MaxPoints = 1, Text = "How many legs does a dog have?", Answers = new List<IAnswer>
                             {
@@ -72,7 +79,7 @@ namespace DAOMock
 
                 new BO.Test()
                 {
-                    ID = 2, IsMultiAnswer = true, RatingType = null, Minutes = 6, Title = "Math", Questions = new List<IQuestion>
+                    ID = 2, IsMultiAnswer = true, RatingType = "No minus points", Minutes = 6, Title = "Math", Questions = new List<IQuestion>
                     {
                         new BO.Question {ID = 1, MaxPoints = 2, Text = "How many legs does a dog have?", Answers = new List<IAnswer>
                             {
@@ -155,6 +162,11 @@ namespace DAOMock
             t.Questions = test.Questions;
             t.Minutes = test.Minutes;
             t.Title = test.Title;
+        }
+
+        public List<string> GetAllRatingTypes()
+        {
+            return _ratingTypes;
         }
     }
 }

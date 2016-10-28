@@ -31,7 +31,6 @@
     </UserControl.Resources>
 
     <DockPanel LastChildFill="True">
-        <Button DockPanel.Dock="Bottom" Width="120" HorizontalAlignment="Left" Command="{Binding BackCommand}">Go back</Button>
         <Button DockPanel.Dock="Bottom" Width="120" HorizontalAlignment="Center" Command="{Binding SubmitTestCommand}" Margin="0 10">Submit Test</Button>
         <StackPanel Background="White">
             <WrapPanel Margin="0 5">
@@ -39,6 +38,8 @@
                 <TextBox Text="{Binding Test.Title}" MinWidth="140"></TextBox>
                 <TextBlock Margin="5 0 5 0">Minutes:</TextBlock>
                 <TextBox Text="{Binding Test.Minutes}" MinWidth="26"></TextBox>
+                <TextBlock Margin="5 0 5 0">Rating type:</TextBlock>
+                <ComboBox ItemsSource="{Binding RatingTypes}" MinWidth="140" SelectedItem="{Binding Test.RatingType}"/>
                 <TextBlock Margin="5 0 5 0">Many Answers:</TextBlock>
                 <CheckBox Name="ManyAnswers" IsEnabled="False" IsChecked="{Binding Test.IsMultiAnswer}" VerticalAlignment="Center"></CheckBox>
             </WrapPanel>
@@ -46,7 +47,7 @@
                 <Button Width="120" Command="{Binding AddQuestionCommand}" Margin="10 0 10 0">Add Question</Button>
                 <Button Width="120" Command="{Binding DeleteQuestionCommand}" Margin="10 0 10 0">Delete Question</Button>
                 <Button Width="120" Command="{Binding AddAnswerCommand}" Margin="10 0 10 0">Add Answer</Button>
-                <Button Width="120" Command="{Binding DeleteAnswerCommand}" Margin="10 0 10 0">Delete Answer</Button>
+                <!--<Button Width="120" Command="{Binding DeleteAnswerCommand}" Margin="10 0 10 0">Delete Answer</Button>-->
             </WrapPanel>
             <TextBlock HorizontalAlignment="Center">Questions:</TextBlock>
             <ListBox ItemsSource="{Binding Questions}" BorderThickness="0" Margin="0 10" MaxHeight="360" SelectedItem="{Binding SelectedQuestion}" ScrollViewer.VerticalScrollBarVisibility="Visible">

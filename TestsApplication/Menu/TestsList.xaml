@@ -29,6 +29,7 @@
                         <TextBlock Text="ID:" VerticalAlignment="Center"/><Label Content="{Binding ID}" MinWidth="20"/>
                         <TextBlock Text="Title:" VerticalAlignment="Center"/><Label Content="{Binding Title}" MinWidth="80"/>
                         <TextBlock Text="Minutes:" VerticalAlignment="Center"/><Label Content="{Binding Minutes}" MinWidth="60"/>
+                        <Label Content="{Binding RatingType}" MinWidth="80"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

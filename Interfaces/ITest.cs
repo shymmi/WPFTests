@@ -12,7 +12,8 @@ namespace Interfaces
         int ID { get; set; }
         int Minutes { get; set; }
         string Title { get; set; }
-        IRating RatingType { get; set; }
+        string RatingType { get; set; }
         IEnumerable<IQuestion> Questions { get; set; }
+        double CalculatePoints();
     }
 }

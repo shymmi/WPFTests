@@ -11,7 +11,7 @@ namespace TestsApplication
     public static class UserContext
     {
         public static User user;
-        public static IDAO dao = new DAOMock.DAO();
+        public static DAOMock.DAO dao = new DAOMock.DAO();
         public static Test test;
     }
 }

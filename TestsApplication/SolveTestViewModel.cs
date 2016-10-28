@@ -16,20 +16,23 @@ namespace TestsApplication
         private Test _test;
         private ObservableCollection<QuestionViewModel> _questions;
         private RelayCommand _submitTestCommand;
-        private RelayCommand _backCommand;
+        private RelayCommand _endTestCommand;
         private int _minutes;
         private int _seconds;
-        private bool _isTimeUp;
+        private bool _isTimeLeft;
+        private double _points;
+        private int _maxPoints;
 
         public SolveTestViewModel()
         {
             _test = UserContext.test;
             _questions = new ObservableCollection<QuestionViewModel>();
             _submitTestCommand = new RelayCommand(param => SubmitTest());
-            _backCommand = new RelayCommand(param => GoBack());
-            FillQuestions();
+            _endTestCommand = new RelayCommand(param => EndTest());
+            SetUpQuestions();
             _minutes = _test.Minutes;
             _seconds = 5;
+            _isTimeLeft = true;
 
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
@@ -38,52 +41,69 @@ namespace TestsApplication
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
-        { 
-            _seconds -= 1;
-            
-            if (_seconds == -1)
+        {
+            if (_minutes > 0 || _seconds > 0)
             {
-                _minutes -= 1;
-                _seconds = 59;
-                RaisePropertyChanged("Minutes");
-            }
-            RaisePropertyChanged("Seconds");
+                _seconds -= 1;
 
-            if (_minutes == 0 && _seconds == 0)
+                if (_seconds == -1)
+                {
+                    _minutes -= 1;
+                    _seconds = 59;
+                    RaisePropertyChanged("Minutes");
+                }
+                RaisePropertyChanged("Seconds");
+            }  
+            else
             {
-                IsTimeUp = true;
-            }       
+                _isTimeLeft = false;
+                RaisePropertyChanged("IsTimeLeft");
+                CalculatePoints();
+            } 
 
         }
 
-        private void FillQuestions()
+        private void CalculatePoints()
+        {
+            _maxPoints = _questions.Sum(x => x.MaxPoints);
+            _points = _test.CalculatePoints();
+            RaisePropertyChanged("Points");
+            RaisePropertyChanged("MaxPoints");
+        }
+
+        private void SetUpQuestions()
         {
             foreach (var q in _test.Questions)
             {
                 _questions.Add(new QuestionViewModel((Question)q));
+                _questions.Last().ClearAnswers();
             }
-        }
-
-        private void GoBack()
-        {
-            Switcher.Switch(new TestsList());
         }
 
         private void SubmitTest()
         {
-            if (_test.Title == "") return;
+            IsTimeLeft = false;
+            RaisePropertyChanged("IsTimeLeft");
+            CalculatePoints();
+        }
 
-            //sum up
+        private void EndTest()
+        {
             Switcher.Switch(new TestsList());
         }
 
-        public bool IsTimeUp
+        public RelayCommand EndTestCommand
         {
-            get { return _isTimeUp; }
+            get { return _endTestCommand; }
+        }
+
+        public bool IsTimeLeft
+        {
+            get { return _isTimeLeft; }
             set
             {
-                _isTimeUp = value;
-                RaisePropertyChanged("IsTimeUp");
+                _isTimeLeft = value;
+                RaisePropertyChanged("IsTimeLeft");
             }    
         }
 
@@ -94,6 +114,26 @@ namespace TestsApplication
             {
                 _minutes = value;
                 RaisePropertyChanged("Minutes");
+            }
+        }
+
+        public double Points
+        {
+            get { return _points; }
+            set
+            {
+                _points = value;
+                RaisePropertyChanged("Points");
+            }
+        }
+
+        public int MaxPoints
+        {
+            get { return _maxPoints; }
+            set
+            {
+                _maxPoints = value;
+                RaisePropertyChanged("MaxPoints");
             }
         }
 
@@ -138,14 +178,6 @@ namespace TestsApplication
             get
             {
                 return _submitTestCommand;
-            }
-        }
-
-        public RelayCommand BackCommand
-        {
-            get
-            {
-                return _backCommand;
             }
         }
 

@@ -74,6 +74,14 @@ namespace TestsApplication
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        
+        public void ClearAnswers()
+        {
+            foreach (var a in _question.Answers)
+            {
+                a.IsSelected = false;
+            }
+        }
 
         private void RaisePropertyChanged(string propertyName)
         {

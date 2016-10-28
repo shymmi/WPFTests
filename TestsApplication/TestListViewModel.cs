@@ -28,8 +28,8 @@ namespace TestsApplication
         
         private ObservableCollection<Test> _tests;
         private Test _selectedTest;
-        private IDAO _dao;
-        private IUser _user;
+        private DAOMock.DAO _dao;
+        private User _user;
         private RelayCommand _logoutCommand;
         private RelayCommand _addTestCommand;
         private RelayCommand _solveTestCommand;
@@ -51,7 +51,7 @@ namespace TestsApplication
             GetAllTests();
         }
 
-        public IUser User
+        public User User
         {
             get
             {
