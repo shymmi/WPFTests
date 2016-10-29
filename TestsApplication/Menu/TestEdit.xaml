@@ -7,6 +7,7 @@
       xmlns:data="clr-namespace:TestsApplication"
       mc:Ignorable="d" 
       FontSize="15"
+      Name="TestEditControl"
       d:DesignHeight="550" d:DesignWidth="725">
 
     <UserControl.DataContext>
@@ -32,22 +33,13 @@
                 <Button Width="120" Command="{Binding AddAnswerCommand}" Margin="10 0 10 0">Add Answer</Button>
             </WrapPanel>
             <TextBlock HorizontalAlignment="Center">Questions:</TextBlock>
-            <Popup StaysOpen="True" MinHeight="100" MinWidth="350" Placement="Center">
-                <Popup.Style>
-                    <Style TargetType="{x:Type Popup}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=HasErrors, Mode=OneWay}" Value="False">
-                                <Setter Property="IsOpen" Value="False"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Popup.Style>
+            <Popup StaysOpen="True" MinHeight="100" MinWidth="350" Placement="Center" IsOpen="{Binding HasErrors, Mode=OneWay}">
                 <DockPanel>
                     <Button DockPanel.Dock="Bottom" Command="{Binding ClosePopupCommand}">Ok</Button>
-                    <ListBox DockPanel.Dock="Top" Margin="0 0 0 0" ItemsSource="{Binding ValidationErrors}" IsEnabled="False" BorderThickness="1" MinHeight="24">
+                    <ListBox DockPanel.Dock="Top" Margin="0 0 0 0" ItemsSource="{Binding DataContext.ValidationErrors, ElementName=TestEditControl}" IsEnabled="False" BorderThickness="1" MinHeight="24">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding}" HorizontalAlignment="Center" Foreground="Red" IsEnabled="False"/>
+                                <TextBlock Text="{Binding}" HorizontalAlignment="Center" Foreground="Red"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

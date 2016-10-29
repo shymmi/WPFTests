@@ -36,33 +36,3 @@ E:\Studia\PW - projekt\WPFTests\TestsApplication\obj\Debug\TestsApplication.Prop
 E:\Studia\PW - projekt\WPFTests\TestsApplication\obj\Debug\TestsApplication.csproj.GenerateResource.Cache
 E:\Studia\PW - projekt\WPFTests\TestsApplication\obj\Debug\TestsApplication.exe
 E:\Studia\PW - projekt\WPFTests\TestsApplication\obj\Debug\TestsApplication.pdb
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\bin\Debug\TestsApplication.exe.config
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\bin\Debug\TestsApplication.exe
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\bin\Debug\TestsApplication.pdb
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\bin\Debug\DAOMock.dll
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\bin\Debug\Interfaces.dll
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\bin\Debug\DAOMock.pdb
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\bin\Debug\Interfaces.pdb
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\TestsApplication.csprojResolveAssemblyReference.cache
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\App.g.cs
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\GeneratedInternalTypeHelper.g.cs
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\TestsApplication_MarkupCompile.cache
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\TestsApplication_MarkupCompile.lref
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\TestsApplication.g.resources
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\TestsApplication.Properties.Resources.resources
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\TestsApplication.csproj.GenerateResource.Cache
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\TestsApplication.exe
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\TestsApplication.pdb
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\PageSwitcher.g.cs
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestsList.g.cs
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\Login.g.cs
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\Login.baml
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestsList.baml
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\PageSwitcher.baml
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestEdit.g.cs
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestSolve.g.cs
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestEdit.baml
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestSolve.baml
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestAdd.g.cs
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Menu\TestAdd.baml
-D:\Studyja\Sem VI\PW\Interfaces\TestsApplication\obj\Debug\Styles\PlaceHolder.baml

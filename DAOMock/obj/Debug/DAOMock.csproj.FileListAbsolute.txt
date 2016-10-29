@@ -12,10 +12,3 @@ E:\Studia\PW - projekt\WPFTests\DAOMock\bin\Debug\Interfaces.pdb
 E:\Studia\PW - projekt\WPFTests\DAOMock\obj\Debug\DAOMock.csprojResolveAssemblyReference.cache
 E:\Studia\PW - projekt\WPFTests\DAOMock\obj\Debug\DAOMock.dll
 E:\Studia\PW - projekt\WPFTests\DAOMock\obj\Debug\DAOMock.pdb
-D:\Studyja\Sem VI\PW\Interfaces\DAOMock\bin\Debug\DAOMock.dll
-D:\Studyja\Sem VI\PW\Interfaces\DAOMock\bin\Debug\DAOMock.pdb
-D:\Studyja\Sem VI\PW\Interfaces\DAOMock\bin\Debug\Interfaces.dll
-D:\Studyja\Sem VI\PW\Interfaces\DAOMock\bin\Debug\Interfaces.pdb
-D:\Studyja\Sem VI\PW\Interfaces\DAOMock\obj\Debug\DAOMock.csprojResolveAssemblyReference.cache
-D:\Studyja\Sem VI\PW\Interfaces\DAOMock\obj\Debug\DAOMock.dll
-D:\Studyja\Sem VI\PW\Interfaces\DAOMock\obj\Debug\DAOMock.pdb

@@ -36,6 +36,7 @@ namespace TestsApplication
             _closePopupCommand = new RelayCommand(param => ClosePopup());
             _validationErrors = new ObservableCollection<string>();
             FillQuestions();
+
         }
 
         private void ClosePopup()
@@ -124,7 +125,7 @@ namespace TestsApplication
         {
             get
             {
-                return _validationErrors.Count > 0;
+                return _validationErrors.Any();
             }
         }
 

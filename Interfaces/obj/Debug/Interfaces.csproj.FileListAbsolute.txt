@@ -8,8 +8,3 @@ E:\Studia\PW - projekt\WPFTests\Interfaces\bin\Debug\Interfaces.pdb
 E:\Studia\PW - projekt\WPFTests\Interfaces\obj\Debug\Interfaces.csprojResolveAssemblyReference.cache
 E:\Studia\PW - projekt\WPFTests\Interfaces\obj\Debug\Interfaces.dll
 E:\Studia\PW - projekt\WPFTests\Interfaces\obj\Debug\Interfaces.pdb
-D:\Studyja\Sem VI\PW\Interfaces\Interfaces\bin\Debug\Interfaces.dll
-D:\Studyja\Sem VI\PW\Interfaces\Interfaces\bin\Debug\Interfaces.pdb
-D:\Studyja\Sem VI\PW\Interfaces\Interfaces\obj\Debug\Interfaces.csprojResolveAssemblyReference.cache
-D:\Studyja\Sem VI\PW\Interfaces\Interfaces\obj\Debug\Interfaces.dll
-D:\Studyja\Sem VI\PW\Interfaces\Interfaces\obj\Debug\Interfaces.pdb
