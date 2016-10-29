@@ -98,6 +98,8 @@ namespace TestsApplication
                 errors.Add("Title must be unique.");
             if (_test.Minutes < 0)
                 errors.Add("Minutes must be positive.");
+            if (_questions.Any(x => !x.Answers.Any(a => a.IsCorrect == true)))
+                errors.Add("At least one answer must be correct");
             if (!_questions.Any(x => x.Answers.Any(a => a.Text != "")) || !_questions.Any(x => x.Text != ""))
                 errors.Add("Test must have question with answer.");
             else
@@ -105,7 +107,7 @@ namespace TestsApplication
                 if (_questions.Any(x => x.Text == ""))
                     errors.Add("Questions can not be empty.");
                 if (_questions.Any(x => x.Answers.Count == 0 || !x.Answers.Any(a => a.Text != "")))
-                    errors.Add("Each question must have an not empty answer.");
+                    errors.Add("Each question must have one not empty answer.");
             }
 
             _validationErrors = errors;
