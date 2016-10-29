@@ -50,6 +50,7 @@ namespace DAOMock.BO
         {
             IsMultiAnswer = false;
             RatingType = "No minus points";
+            Title = "";
             Questions = new ObservableCollection<IQuestion>();
         }
 

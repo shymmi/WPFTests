@@ -34,6 +34,7 @@ namespace DAOMock.BO
 
         public Question()
         {
+            Text = "";
             Answers = new List<IAnswer>();
         }
 

@@ -16,13 +16,13 @@ namespace TestsApplication
         private Test _test;
         private ObservableCollection<QuestionViewModel> _questions;
         private QuestionViewModel _selectedQuestion;
-        //private Answer _selectedAnswer;
         private List<string> _ratingTypes;
+        private ObservableCollection<string> _validationErrors;
         private RelayCommand _submitTestCommand;
         private RelayCommand _addQuestionCommand;
         private RelayCommand _deleteQuestionCommand;
         private RelayCommand _addAnswerCommand;
-        //private RelayCommand _deleteAnswerCommand;
+        private RelayCommand _closePopupCommand;
 
         public EditTestViewModel()
         {
@@ -33,8 +33,15 @@ namespace TestsApplication
             _addQuestionCommand = new RelayCommand(param => AddQuestion());
             _deleteQuestionCommand = new RelayCommand(param => DeleteQuestion());
             _addAnswerCommand = new RelayCommand(param => AddAnswer());
-            //_deleteAnswerCommand = new RelayCommand(param => DeleteAnswer());
+            _closePopupCommand = new RelayCommand(param => ClosePopup());
+            _validationErrors = new ObservableCollection<string>();
             FillQuestions();
+        }
+
+        private void ClosePopup()
+        {
+            _validationErrors = new ObservableCollection<string>();
+            RaisePropertyChanged("HasErrors");
         }
 
         private void FillQuestions()
@@ -53,7 +60,7 @@ namespace TestsApplication
 
         private void DeleteQuestion()
         {
-            if (_selectedQuestion == null) return;//always null
+            if (_selectedQuestion == null) return;
             _questions.Remove(_selectedQuestion);
             _selectedQuestion = null;
         }
@@ -65,21 +72,11 @@ namespace TestsApplication
             _selectedQuestion.Answers.Last().ID = _selectedQuestion.Answers.Max(x => x.ID) + 1;
         }
 
-        //private void DeleteAnswer()
-        //{
-        //    if (_selectedAnswer == null) return;
-        //    Console.WriteLine("Answer: {0}", _selectedAnswer.Text);
-        //    _selectedQuestion.Answers.Remove(_selectedAnswer);          
-        //    _selectedAnswer = null;
-        //}
-
         private void SubmitTest()
         {
-            if (_test.Title == "") return;
-            if (!_questions.Any(x => x.Answers.Any(a => a.Text != ""))) return;
-            if (_questions.Any(x => x.Answers.Count == 0 || !x.Answers.Any(a => a.Text != ""))) return;
+            Validate();         
+            if (HasErrors) return;
             RemoveEmptyAnswers();
-
             var t = new List<IQuestion>();
             foreach (var q in _questions)
             {
@@ -88,6 +85,28 @@ namespace TestsApplication
             _test.Questions = t;
             UserContext.dao.EditTest(_test);
             Switcher.Switch(new TestsList());
+        }
+
+        private void Validate()
+        {
+            var errors = new ObservableCollection<string>();
+
+            if (_test.Title == "")
+                errors.Add("Title cannot be empty.");
+            else if (UserContext.dao.GetAllTests().Any(x => x.Title == _test.Title && x.ID != _test.ID))
+                errors.Add("Title must be unique.");
+            if (_test.Minutes < 0)
+                errors.Add("Minutes must be positive.");
+            if (!_questions.Any(x => x.Answers.Any(a => a.Text != "")))
+                errors.Add("Test must have question with answer.");
+            if (_questions.Any(x => x.Text == ""))
+                errors.Add("Questions can not be empty.");
+            if (_questions.Any(x => x.Answers.Count == 0 || !x.Answers.Any(a => a.Text != "")))
+                errors.Add("Each question must have an answer.");
+
+            _validationErrors = errors;
+            RaisePropertyChanged("ValidationErrors");
+            RaisePropertyChanged("HasErrors");
         }
 
         private void RemoveEmptyAnswers()
@@ -101,21 +120,18 @@ namespace TestsApplication
             }
         }
 
+        public bool HasErrors
+        {
+            get
+            {
+                return _validationErrors.Count > 0;
+            }
+        }
+
         public List<string> RatingTypes
         {
             get { return _ratingTypes; }
         }
-
-
-        //public Answer SelectedAnswer
-        //{
-        //    get { return _selectedAnswer; }
-        //    set
-        //    {
-        //        _selectedAnswer = value;
-        //        RaisePropertyChanged("SelectedAnswer");
-        //    }
-        //}
 
         public QuestionViewModel SelectedQuestion
         {
@@ -127,6 +143,15 @@ namespace TestsApplication
             }
         }
 
+        public ObservableCollection<string> ValidationErrors
+        {
+            get { return _validationErrors; }
+            set
+            {
+                _validationErrors = value;
+                RaisePropertyChanged("ValidationErrors");
+            }
+        }
         public Test Test
         {
             get
@@ -151,6 +176,11 @@ namespace TestsApplication
                 _questions = value;
                 RaisePropertyChanged("Question");
             }
+        }
+
+        public RelayCommand ClosePopupCommand
+        {
+            get { return _closePopupCommand; }
         }
 
         public RelayCommand SubmitTestCommand
@@ -184,14 +214,6 @@ namespace TestsApplication
                 return _deleteQuestionCommand;
             }
         }
-
-        //public RelayCommand DeleteAnswerCommand
-        //{
-        //    get
-        //    {
-        //        return _deleteAnswerCommand;
-        //    }
-        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -23,6 +23,24 @@
     <DockPanel Background="White">
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="24" FontWeight="Bold">Tests Application</TextBlock>
         <TextBlock DockPanel.Dock="Bottom">By Szymon Kasperski</TextBlock>
+        <ListBox DockPanel.Dock="Top" Margin="0 0 0 0" ItemsSource="{Binding ValidationErrors}" IsEnabled="False" BorderThickness="0" MinHeight="24">
+            <ListBox.Style>
+                <Style TargetType="{x:Type ListBox}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HasErrors}" Value="False">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Style>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}" HorizontalAlignment="Center" Foreground="Red" IsEnabled="False"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <StackPanel MinHeight="50" MaxWidth="110" Background="White" VerticalAlignment="Center" FocusManager.FocusedElement="{Binding ElementName=nick}">
             <TextBox Name="nick" Style="{StaticResource placeHolder}" Tag="username" DockPanel.Dock="Top" Margin="0 0 0 5" Height="24" Width="80" Text="{Binding User.NickName, Mode=TwoWay}"></TextBox>
             <TextBox Name="password" Style="{StaticResource placeHolder}" Tag="password" DockPanel.Dock="Top" Margin="0 5 0 10" Height="24" Width="80" Text="{Binding User.Password, Mode=TwoWay}"></TextBox>

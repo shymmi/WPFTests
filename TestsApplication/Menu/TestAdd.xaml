@@ -38,6 +38,24 @@
                 <CheckBox IsChecked="{Binding Test.IsMultiAnswer}" VerticalAlignment="Center"></CheckBox>
             </WrapPanel>
             <Button Width="120" HorizontalAlignment="Center" Command="{Binding SubmitTestCommand}">Submit Test</Button>
+            <ListBox DockPanel.Dock="Top" Margin="0 0 0 0" ItemsSource="{Binding ValidationErrors}" IsEnabled="False" BorderThickness="0" MinHeight="24">
+                <ListBox.Style>
+                    <Style TargetType="{x:Type ListBox}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasErrors}" Value="False">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.Style>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" HorizontalAlignment="Center" Foreground="Red" IsEnabled="False"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
     </DockPanel>
 </UserControl>

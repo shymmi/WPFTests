@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 using Interfaces;
 using System.ComponentModel;
 using TestsApplication.Menu;
+using System.Collections.ObjectModel;
 
 namespace TestsApplication
 {
     class LoginViewModel : INotifyPropertyChanged
     {
-        private IDAO _dao;
         private IUser _user;
         private RelayCommand _loginCommand;
+        private ObservableCollection<string> _validationErrors;
 
         public IUser User
         {
@@ -47,18 +48,58 @@ namespace TestsApplication
         {
             _loginCommand = new RelayCommand(param => Login());
             _user = new DAOMock.BO.User();
-            _dao = new DAOMock.DAO();
+            _validationErrors = new ObservableCollection<string>();
         }
 
         private void Login()
         {
-            if (_dao.GetAllUsers().Any(x => x.NickName == _user.NickName && x.Password == _user.Password))
-            {
-                User = _dao.GetAllUsers().First(x => x.NickName == _user.NickName && x.Password == _user.Password);
+            Validate();
+            if (HasErrors) return;
 
-                UserContext.user = (DAOMock.BO.User)User;
-                Switcher.Switch(new TestsList());
+            User = UserContext.dao.GetAllUsers().First(x => x.NickName == _user.NickName && x.Password == _user.Password);
+            UserContext.user = (DAOMock.BO.User)User;
+            Switcher.Switch(new TestsList());
+        }
+
+        public bool HasErrors
+        {
+            get
+            {
+                return _validationErrors.Count > 0;
             }
+        }
+
+        public ObservableCollection<string> ValidationErrors
+        {
+            get { return _validationErrors; }
+            set
+            {
+                _validationErrors = value;
+                RaisePropertyChanged("ValidationErrors");
+            }
+        }
+
+        public void Validate()
+        {
+            var errors = new ObservableCollection<string>();
+
+            if (User.NickName == "")
+                errors.Add("Username cannot be empty.");
+            else
+            {
+                if (!UserContext.dao.GetAllUsers().Any(x => x.NickName == User.NickName))
+                {
+                    errors.Add("Such a username does not exist.");
+                }
+                else if (!UserContext.dao.GetAllUsers().Any(x => x.NickName == User.NickName && x.Password == User.Password))
+                {
+                    errors.Add("Provided password is incorrect.");
+                }
+            }
+
+            _validationErrors = errors;
+            RaisePropertyChanged("ValidationErrors");
+            RaisePropertyChanged("HasErrors");
         }
     }
 }

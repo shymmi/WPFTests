@@ -35,6 +35,7 @@ namespace DAOMock.BO
 
         public Answer()
         {
+            Text = "";
             IsSelected = false;
         }
     }

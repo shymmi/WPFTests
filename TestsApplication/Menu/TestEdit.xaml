@@ -12,23 +12,6 @@
     <UserControl.DataContext>
         <data:EditTestViewModel/>
     </UserControl.DataContext>
-    
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="..\Styles\PlaceHolder.xaml"></ResourceDictionary>
-                <!--<ResourceDictionary>
-                    <Style TargetType="ListBoxItem">
-                        <Style.Triggers>
-                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                                <Setter Property="IsSelected" Value="True"></Setter>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ResourceDictionary>-->
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
 
     <DockPanel LastChildFill="True">
         <Button DockPanel.Dock="Bottom" Width="120" HorizontalAlignment="Center" Command="{Binding SubmitTestCommand}" Margin="0 10">Submit Test</Button>
@@ -47,9 +30,29 @@
                 <Button Width="120" Command="{Binding AddQuestionCommand}" Margin="10 0 10 0">Add Question</Button>
                 <Button Width="120" Command="{Binding DeleteQuestionCommand}" Margin="10 0 10 0">Delete Question</Button>
                 <Button Width="120" Command="{Binding AddAnswerCommand}" Margin="10 0 10 0">Add Answer</Button>
-                <!--<Button Width="120" Command="{Binding DeleteAnswerCommand}" Margin="10 0 10 0">Delete Answer</Button>-->
             </WrapPanel>
             <TextBlock HorizontalAlignment="Center">Questions:</TextBlock>
+            <Popup StaysOpen="True" MinHeight="100" MinWidth="350" Placement="Center">
+                <Popup.Style>
+                    <Style TargetType="{x:Type Popup}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=HasErrors, Mode=OneWay}" Value="False">
+                                <Setter Property="IsOpen" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Popup.Style>
+                <DockPanel>
+                    <Button DockPanel.Dock="Bottom" Command="{Binding ClosePopupCommand}">Ok</Button>
+                    <ListBox DockPanel.Dock="Top" Margin="0 0 0 0" ItemsSource="{Binding ValidationErrors}" IsEnabled="False" BorderThickness="1" MinHeight="24">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding}" HorizontalAlignment="Center" Foreground="Red" IsEnabled="False"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </Popup>
             <ListBox ItemsSource="{Binding Questions}" BorderThickness="0" Margin="0 10" MaxHeight="360" SelectedItem="{Binding SelectedQuestion}" ScrollViewer.VerticalScrollBarVisibility="Visible">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
