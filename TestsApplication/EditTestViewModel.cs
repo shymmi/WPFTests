@@ -98,12 +98,15 @@ namespace TestsApplication
                 errors.Add("Title must be unique.");
             if (_test.Minutes < 0)
                 errors.Add("Minutes must be positive.");
-            if (!_questions.Any(x => x.Answers.Any(a => a.Text != "")))
+            if (!_questions.Any(x => x.Answers.Any(a => a.Text != "")) || !_questions.Any(x => x.Text != ""))
                 errors.Add("Test must have question with answer.");
-            if (_questions.Any(x => x.Text == ""))
-                errors.Add("Questions can not be empty.");
-            if (_questions.Any(x => x.Answers.Count == 0 || !x.Answers.Any(a => a.Text != "")))
-                errors.Add("Each question must have an answer.");
+            else
+            {
+                if (_questions.Any(x => x.Text == ""))
+                    errors.Add("Questions can not be empty.");
+                if (_questions.Any(x => x.Answers.Count == 0 || !x.Answers.Any(a => a.Text != "")))
+                    errors.Add("Each question must have an not empty answer.");
+            }
 
             _validationErrors = errors;
             RaisePropertyChanged("ValidationErrors");
