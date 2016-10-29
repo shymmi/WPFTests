@@ -88,7 +88,6 @@ namespace TestsApplication
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                //Validate();
             }
         }
     }
